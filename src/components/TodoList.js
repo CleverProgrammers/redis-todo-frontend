@@ -3,6 +3,21 @@ import styled from 'styled-components'
 
 const TodoList = () => {
   const [input, setInput] = useState('')
+  const [todos, setTodos] = useState([])
+
+  console.log(todos)
+
+  useEffect(() => {
+    getTodos()
+  }, [])
+
+  const getTodos = async () => {
+    const dbTodos = await fetch(`http://localhost:9000/getTodos`)
+
+    const todos = await dbTodos.json()
+
+    setTodos(todos)
+  }
 
   const addTodo = async () => {
     await fetch('http://localhost:9000/addTodo', {
@@ -17,6 +32,7 @@ const TodoList = () => {
     })
 
     setInput('')
+    getTodos()
   }
 
   return (
