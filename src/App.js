@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Header from './components/Header'
+import TodoList from './components/TodoList'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
           <TodoContent>
             <Title>Dashboard</Title>
             <Greeting>Good morning, David</Greeting>
+            <TodoList />
           </TodoContent>
         </MainContent>
       </Main>
