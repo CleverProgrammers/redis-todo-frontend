@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import TodoItem from './TodoItem'
 
 const TodoList = () => {
   const [input, setInput] = useState('')
@@ -52,6 +53,11 @@ const TodoList = () => {
           }}
         />
       </TodoCategoryHeader>
+      <div>
+        {todos.map(todo => (
+          <TodoItem key={todo.todo} todo={todo} />
+        ))}
+      </div>
     </Wrapper>
   )
 }
