@@ -15,6 +15,36 @@ const TodoItem = ({ todo, color, name, getTodos }) => {
     getTodos()
   }
 
+  const updateTodo = async () => {
+    await fetch(`http://localhost:9000/updateTodo/${todo.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        todo: editedTodo,
+        status: todo.status === true,
+      }),
+    })
+
+    getTodos()
+  }
+
+  const checkTodo = async () => {
+    await fetch(`http://localhost:9000/updateTodo/${todo.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        todo: todo.todo,
+        status: !(todo.status === true),
+      }),
+    })
+
+    getTodos()
+  }
+
   return (
     <TodoListItem>
       <Checkbox
@@ -25,7 +55,9 @@ const TodoItem = ({ todo, color, name, getTodos }) => {
         value={editedTodo}
         onChange={e => setEditedTodo(e.target.value)}
       />
-      {todo.todo !== editedTodo && <SaveTodo className='fas fa-check' />}
+      {todo.todo !== editedTodo && (
+        <SaveTodo onClick={() => updateTodo()} className='fas fa-check' />
+      )}
       <DeleteTodo onClick={() => deleteTodo()} className='fas fa-trash-alt' />
     </TodoListItem>
   )
