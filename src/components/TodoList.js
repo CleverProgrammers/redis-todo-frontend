@@ -4,6 +4,21 @@ import styled from 'styled-components'
 const TodoList = () => {
   const [input, setInput] = useState('')
 
+  const addTodo = async () => {
+    await fetch('http://localhost:9000/addTodo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        todo: input,
+        status: false,
+      }),
+    })
+
+    setInput('')
+  }
+
   return (
     <Wrapper>
       <TodoCategoryHeader>
@@ -12,7 +27,14 @@ const TodoList = () => {
         </CategoryIcon>
         <Title>My Todo</Title>
         <TodoInput value={input} onChange={e => setInput(e.target.value)} />
-        <AddTodo className='fas fa-plus' />
+        <AddTodo
+          className='fas fa-plus'
+          onClick={() => {
+            if (input.length > 0) {
+              addTodo()
+            }
+          }}
+        />
       </TodoCategoryHeader>
     </Wrapper>
   )
