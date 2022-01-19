@@ -4,6 +4,17 @@ import styled from 'styled-components'
 const TodoItem = ({ todo, color, name, getTodos }) => {
   const [editedTodo, setEditedTodo] = useState(todo.todo)
 
+  const deleteTodo = async () => {
+    await fetch(`http://localhost:9000/deleteTodo/${todo.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    getTodos()
+  }
+
   return (
     <TodoListItem>
       <Checkbox
@@ -15,7 +26,7 @@ const TodoItem = ({ todo, color, name, getTodos }) => {
         onChange={e => setEditedTodo(e.target.value)}
       />
       {todo.todo !== editedTodo && <SaveTodo className='fas fa-check' />}
-      <DeleteTodo className='fas fa-trash-alt' />
+      <DeleteTodo onClick={() => deleteTodo()} className='fas fa-trash-alt' />
     </TodoListItem>
   )
 }
