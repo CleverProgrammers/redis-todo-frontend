@@ -49,6 +49,7 @@ const TodoItem = ({ todo, color, name, getTodos }) => {
     <TodoListItem>
       <Checkbox
         className={todo.status ? 'fas fa-check-circle' : 'far fa-circle'}
+        onClick={() => checkTodo()}
       />
       <input
         style={{ textDecoration: todo.status ? 'line-through' : '' }}
