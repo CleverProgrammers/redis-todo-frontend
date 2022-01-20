@@ -55,7 +55,7 @@ const TodoList = () => {
       </TodoCategoryHeader>
       <div>
         {todos.map(todo => (
-          <TodoItem key={todo.todo} todo={todo} />
+          <TodoItem key={todo.todo} todo={todo} getTodos={getTodos} />
         ))}
       </div>
     </Wrapper>
